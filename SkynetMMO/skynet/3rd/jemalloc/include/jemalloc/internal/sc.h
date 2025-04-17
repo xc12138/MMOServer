@@ -18,7 +18,7 @@
  * each one covers allocations for base / SC_NGROUP possible allocation sizes.
  * We call that value (base / SC_NGROUP) the delta of the group. Each size class
  * is delta larger than the one before it (including the initial size class in a
- * group, which is delta large than 2**base, the largest size class in the
+ * group, which is delta larger than base, the largest size class in the
  * previous group).
  * To make the math all work out nicely, we require that SC_NGROUP is a power of
  * two, and define it in terms of SC_LG_NGROUP. We'll often talk in terms of
@@ -53,10 +53,11 @@
  * classes; one per power of two, up until we hit the quantum size. There are
  * therefore LG_QUANTUM - SC_LG_TINY_MIN such size classes.
  *
- * Next, we have a size class of size LG_QUANTUM. This can't be the start of a
- * group in the sense we described above (covering a power of two range) since,
- * if we divided into it to pick a value of delta, we'd get a delta smaller than
- * (1 << LG_QUANTUM) for sizes >= (1 << LG_QUANTUM), which is against the rules.
+ * Next, we have a size class of size (1 << LG_QUANTUM).  This can't be the
+ * start of a group in the sense we described above (covering a power of two
+ * range) since, if we divided into it to pick a value of delta, we'd get a
+ * delta smaller than (1 << LG_QUANTUM) for sizes >= (1 << LG_QUANTUM), which
+ * is against the rules.
  *
  * The first base we can divide by SC_NGROUP while still being at least
  * (1 << LG_QUANTUM) is SC_NGROUP * (1 << LG_QUANTUM). We can get there by
@@ -196,18 +197,34 @@
     (SC_LG_BASE_MAX - SC_LG_FIRST_REGULAR_BASE + 1) - 1)
 #define SC_NSIZES (SC_NTINY + SC_NPSEUDO + SC_NREGULAR)
 
- /* The number of size classes that are a multiple of the page size. */
+/*
+ * The number of size classes that are a multiple of the page size.
+ *
+ * Here are the first few bases that have a page-sized SC.
+ *
+ *      lg(base) |     base | highest SC | page-multiple SCs
+ * --------------|------------------------------------------
+ *   LG_PAGE - 1 | PAGE / 2 |       PAGE | 1
+ *       LG_PAGE |     PAGE |   2 * PAGE | 1
+ *   LG_PAGE + 1 | 2 * PAGE |   4 * PAGE | 2
+ *   LG_PAGE + 2 | 4 * PAGE |   8 * PAGE | 4
+ *
+ * The number of page-multiple SCs continues to grow in powers of two, up until
+ * lg_delta == lg_page, which corresponds to setting lg_base to lg_page +
+ * SC_LG_NGROUP.  So, then, the number of size classes that are multiples of the
+ * page size whose lg_delta is less than the page size are
+ * is 1 + (2**0 + 2**1 + ... + 2**(lg_ngroup - 1) == 2**lg_ngroup.
+ *
+ * For each base with lg_base in [lg_page + lg_ngroup, lg_base_max), there are
+ * NGROUP page-sized size classes, and when lg_base == lg_base_max, there are
+ * NGROUP - 1.
+ *
+ * This gives us the quantity we seek.
+ */
 #define SC_NPSIZES (							\
-    /* Start with all the size classes. */				\
-    SC_NSIZES								\
-    /* Subtract out those groups with too small a base. */		\
-    - (LG_PAGE - 1 - SC_LG_FIRST_REGULAR_BASE) * SC_NGROUP		\
-    /* And the pseudo-group. */						\
-    - SC_NPSEUDO							\
-    /* And the tiny group. */						\
-    - SC_NTINY								\
-    /* Groups where ndelta*delta is not a multiple of the page size. */	\
-    - (2 * (SC_NGROUP)))
+    SC_NGROUP								\
+    + (SC_LG_BASE_MAX - (LG_PAGE + SC_LG_NGROUP)) * SC_NGROUP		\
+    + SC_NGROUP - 1)
 
 /*
  * We declare a size class is binnable if size < page size * group. Or, in other
@@ -229,16 +246,22 @@
 #  error "Too many small size classes"
 #endif
 
-/* The largest size class in the lookup table. */
-#define SC_LOOKUP_MAXCLASS ((size_t)1 << 12)
+/* The largest size class in the lookup table, and its binary log. */
+#define SC_LG_MAX_LOOKUP 12
+#define SC_LOOKUP_MAXCLASS (1 << SC_LG_MAX_LOOKUP)
 
 /* Internal, only used for the definition of SC_SMALL_MAXCLASS. */
-#define SC_SMALL_MAX_BASE ((size_t)1 << (LG_PAGE + SC_LG_NGROUP - 1))
-#define SC_SMALL_MAX_DELTA ((size_t)1 << (LG_PAGE - 1))
+#define SC_SMALL_MAX_BASE (1 << (LG_PAGE + SC_LG_NGROUP - 1))
+#define SC_SMALL_MAX_DELTA (1 << (LG_PAGE - 1))
 
 /* The largest size class allocated out of a slab. */
 #define SC_SMALL_MAXCLASS (SC_SMALL_MAX_BASE				\
     + (SC_NGROUP - 1) * SC_SMALL_MAX_DELTA)
+
+/* The fastpath assumes all lookup-able sizes are small. */
+#if (SC_SMALL_MAXCLASS < SC_LOOKUP_MAXCLASS)
+#  error "Lookup table sizes must be small"
+#endif
 
 /* The smallest size class not allocated out of a slab. */
 #define SC_LARGE_MINCLASS ((size_t)1ULL << (LG_PAGE + SC_LG_NGROUP))
@@ -250,6 +273,19 @@
 
 /* The largest size class supported. */
 #define SC_LARGE_MAXCLASS (SC_MAX_BASE + (SC_NGROUP - 1) * SC_MAX_DELTA)
+
+/* Maximum number of regions in one slab. */
+#ifndef CONFIG_LG_SLAB_MAXREGS
+#  define SC_LG_SLAB_MAXREGS (LG_PAGE - SC_LG_TINY_MIN)
+#else
+#  if CONFIG_LG_SLAB_MAXREGS < (LG_PAGE - SC_LG_TINY_MIN)
+#    error "Unsupported SC_LG_SLAB_MAXREGS"
+#  else
+#    define SC_LG_SLAB_MAXREGS CONFIG_LG_SLAB_MAXREGS
+#  endif
+#endif
+
+#define SC_SLAB_MAXREGS (1U << SC_LG_SLAB_MAXREGS)
 
 typedef struct sc_s sc_t;
 struct sc_s {
@@ -308,10 +344,11 @@ struct sc_data_s {
 	sc_t sc[SC_NSIZES];
 };
 
+size_t reg_size_compute(int lg_base, int lg_delta, int ndelta);
 void sc_data_init(sc_data_t *data);
 /*
  * Updates slab sizes in [begin, end] to be pgs pages in length, if possible.
- * Otherwise, does its best to accomodate the request.
+ * Otherwise, does its best to accommodate the request.
  */
 void sc_data_update_slab_size(sc_data_t *data, size_t begin, size_t end,
     int pgs);

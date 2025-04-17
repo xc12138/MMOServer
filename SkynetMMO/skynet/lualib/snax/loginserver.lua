@@ -177,23 +177,20 @@ local function launch_master(conf)
 				skynet.error(string.format("invalid client (fd = %d) error = %s", fd, err))
 			end
 		end
-		socket.close_fd(fd)	-- We haven't call socket.start, so use socket.close_fd rather than socket.close.
+		socket.close(fd)
 	end)
 end
 
 local function login(conf)
-	skynet.error("--------------loginserver login")
 	local name = "." .. (conf.name or "login")
 	skynet.start(function()
 		local loginmaster = skynet.localname(name)
 		if loginmaster then
-			skynet.error("--------------loginserver true  name: " .. name)
 			local auth_handler = assert(conf.auth_handler)
 			launch_master = nil
 			conf = nil
 			launch_slave(auth_handler)
 		else
-			skynet.error("--------------loginserver false  name: " .. name)
 			launch_slave = nil
 			conf.auth_handler = nil
 			assert(conf.login_handler)

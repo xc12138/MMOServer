@@ -7,19 +7,19 @@
 #include <stdint.h>
 
 #define PTYPE_TEXT 0
-#define PTYPE_RESPONSE 1       // 表示一个回应包
-#define PTYPE_MULTICAST 2      // 广播处理
-#define PTYPE_CLIENT 3         // 用来处理网络客户端的请求消息
-#define PTYPE_SYSTEM 4         // 系统消息
-#define PTYPE_HARBOR 5         // 跨界点消息
-#define PTYPE_SOCKET 6         // 套接字消息
+#define PTYPE_RESPONSE 1
+#define PTYPE_MULTICAST 2
+#define PTYPE_CLIENT 3
+#define PTYPE_SYSTEM 4
+#define PTYPE_HARBOR 5
+#define PTYPE_SOCKET 6
 // read lualib/skynet.lua examples/simplemonitor.lua
-#define PTYPE_ERROR 7	       // 错误消息
+#define PTYPE_ERROR 7	
 // read lualib/skynet.lua lualib/mqueue.lua lualib/snax.lua
-#define PTYPE_RESERVED_QUEUE 8  
+#define PTYPE_RESERVED_QUEUE 8
 #define PTYPE_RESERVED_DEBUG 9
-#define PTYPE_RESERVED_LUA 10  // Lua类型的消息
-#define PTYPE_RESERVED_SNAX 11 // snax服务消息
+#define PTYPE_RESERVED_LUA 10
+#define PTYPE_RESERVED_SNAX 11
 
 #define PTYPE_TAG_DONTCOPY 0x10000
 #define PTYPE_TAG_ALLOCSESSION 0x20000
