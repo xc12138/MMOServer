@@ -1,0 +1,49 @@
+[:01000002] LAUNCH snlua bootstrap
+[:01000003] LAUNCH snlua launcher
+[:01000004] LAUNCH snlua cmaster
+[:01000004] master listen socket 192.168.3.22:2013
+[:01000005] LAUNCH snlua cslave
+[:01000005] slave connect to master 192.168.3.22:2013
+[:01000004] connect from 192.168.3.22:47300 4
+[:01000006] LAUNCH harbor 1 16777221
+[:01000004] Harbor 1 (fd=4) report 192.168.3.22:2526
+[:01000005] Waiting for 0 harbors
+[:01000005] Shakehand ready
+[:01000007] LAUNCH snlua datacenterd
+[:01000008] LAUNCH snlua service_mgr
+[:01000009] LAUNCH snlua main
+[:01000009] Server start
+[:0100000a] LAUNCH snlua protoloader
+[:0100000b] LAUNCH snlua debug_console 8000
+[:0100000b] Start debug console at 127.0.0.1:8000
+[:0100000c] LAUNCH snlua logind
+[:0100000d] LAUNCH snlua logind
+[:0100000e] LAUNCH snlua logind
+[:0100000f] LAUNCH snlua logind
+[:01000010] LAUNCH snlua logind
+[:01000011] LAUNCH snlua logind
+[:01000012] LAUNCH snlua logind
+[:01000013] LAUNCH snlua logind
+[:01000014] LAUNCH snlua logind
+[:0100000c] login server listen at : 0.0.0.0 8001
+[:01000015] LAUNCH snlua gated 16777228 1 1
+[:01000015] Listen on 0.0.0.0:8888
+[:01000016] LAUNCH snlua msgagent
+[:01000017] LAUNCH snlua msgagent
+[:01000018] LAUNCH snlua msgagent
+[:01000019] LAUNCH snlua msgagent
+[:0100001a] LAUNCH snlua msgagent
+[:0100001b] LAUNCH snlua msgagent
+[:0100001c] LAUNCH snlua msgagent
+[:0100001d] LAUNCH snlua msgagent
+[:0100001e] LAUNCH snlua msgagent
+[:0100001f] LAUNCH snlua msgagent
+[:01000020] LAUNCH snlua world
+[:01000021] LAUNCH snlua scene 16777248
+[:01000022] LAUNCH snlua scene 16777248
+[:01000023] LAUNCH snlua chat
+[:01000024] LAUNCH snlua dbserver
+[:01000025] LAUNCH snlua dbserver
+[:01000026] LAUNCH snlua id_service
+[:01000009] KILL self
+[:01000002] KILL self
