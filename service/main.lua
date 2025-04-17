@@ -24,7 +24,7 @@ skynet.start(function()
 	skynet.call(dbserver, "lua", "open", {
 		host = "127.0.0.1",
 		port = 3306,
-		database = "UnityMMOAccount",
+		database = "MMODemoAccount",
 		user = "root",
 		password = "123456",
 		name = ".AccountDBServer",
@@ -34,7 +34,7 @@ skynet.start(function()
 	skynet.call(gamedbserver, "lua", "open", {
 		host = "127.0.0.1",
 		port = 3306,
-		database = "UnityMMOGame",
+		database = "MMODemoGame",
 		user = "root",
 		password = "123456",
 		name = ".GameDBServer",
