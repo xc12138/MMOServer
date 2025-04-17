@@ -1,0 +1,135 @@
+[:01000002] LAUNCH snlua bootstrap
+[:01000003] LAUNCH snlua launcher
+[:01000004] LAUNCH snlua cmaster
+[:01000004] master listen socket 192.168.3.22:2013
+[:01000005] LAUNCH snlua cslave
+[:01000005] slave connect to master 192.168.3.22:2013
+[:01000004] connect from 192.168.3.22:47318 4
+[:01000006] LAUNCH harbor 1 16777221
+[:01000004] Harbor 1 (fd=4) report 192.168.3.22:2526
+[:01000005] Waiting for 0 harbors
+[:01000005] Shakehand ready
+[:01000007] LAUNCH snlua datacenterd
+[:01000008] LAUNCH snlua service_mgr
+[:01000009] LAUNCH snlua main
+[:01000009] Server start
+[:0100000a] LAUNCH snlua protoloader
+[:0100000b] LAUNCH snlua debug_console 8000
+[:0100000b] Start debug console at 127.0.0.1:8000
+[:0100000c] LAUNCH snlua logind
+[:0100000d] LAUNCH snlua logind
+[:0100000e] LAUNCH snlua logind
+[:0100000f] LAUNCH snlua logind
+[:01000010] LAUNCH snlua logind
+[:01000011] LAUNCH snlua logind
+[:01000012] LAUNCH snlua logind
+[:01000013] LAUNCH snlua logind
+[:01000014] LAUNCH snlua logind
+[:0100000c] login server listen at : 0.0.0.0 8001
+[:01000015] LAUNCH snlua gated 16777228 1 1
+[:01000015] Listen on 0.0.0.0:8888
+[:01000016] LAUNCH snlua msgagent
+[:01000017] LAUNCH snlua msgagent
+[:01000018] LAUNCH snlua msgagent
+[:01000019] LAUNCH snlua msgagent
+[:0100001a] LAUNCH snlua msgagent
+[:0100001b] LAUNCH snlua msgagent
+[:0100001c] LAUNCH snlua msgagent
+[:0100001d] LAUNCH snlua msgagent
+[:0100001e] LAUNCH snlua msgagent
+[:0100001f] LAUNCH snlua msgagent
+[:01000020] LAUNCH snlua world
+[:01000021] LAUNCH snlua scene 16777248
+[:01000022] LAUNCH snlua scene 16777248
+[:01000023] LAUNCH snlua chat
+[:01000024] LAUNCH snlua dbserver
+[:01000025] LAUNCH snlua dbserver
+[:01000026] LAUNCH snlua id_service
+[:01000009] KILL self
+[:01000002] KILL self
+[:0100000d] connect from 192.168.3.6:49268 (fd = 10)
+Cat:logind.lua[22] user, password server	123	password	DevelopServer
+[:0100000d] -----------------客户端发送token
+123@DevelopServer is login, secret is 80f18d1492eb1275
+Cat:msgagent.lua[50] user_info.agent	16777238
+[:01000016] 123 is login
+[:0100000e] connect from 192.168.3.6:49272 (fd = 12)
+Cat:logind.lua[22] user, password server	123	password	DevelopServer
+[:0100000e] -----------------客户端发送token
+123@DevelopServer is login, secret is 04d736d5a4ac4d8b
+Cat:Task.lua[Logout]
+[:01000016] 123 is logout
+123@DevelopServer is logout
+[:01000016] KILL self
+Cat:msgagent.lua[50] user_info.agent	16777239
+[:01000017] 123 is login
+[:0100000f] connect from 192.168.3.6:49278 (fd = 14)
+Cat:logind.lua[22] user, password server	123	password	DevelopServer
+[:0100000f] -----------------客户端发送token
+123@DevelopServer is login, secret is e68e00a67755685c
+Cat:Task.lua[Logout]
+[:01000017] 123 is logout
+123@DevelopServer is logout
+[:01000017] KILL self
+Cat:msgagent.lua[50] user_info.agent	16777240
+[:01000018] 123 is login
+[:01000010] connect from 192.168.3.6:49280 (fd = 16)
+Cat:logind.lua[22] user, password server	123	password	DevelopServer
+[:01000010] -----------------客户端发送token
+123@DevelopServer is login, secret is a85f4ac0a2f81485
+Cat:Task.lua[Logout]
+[:01000018] 123 is logout
+123@DevelopServer is logout
+[:01000018] KILL self
+Cat:msgagent.lua[50] user_info.agent	16777241
+[:01000019] 123 is login
+[:01000011] connect from 192.168.3.6:49282 (fd = 18)
+Cat:logind.lua[22] user, password server	123	password	DevelopServer
+[:01000011] -----------------客户端发送token
+123@DevelopServer is login, secret is 3ca13afc02e5dfb7
+Cat:Task.lua[Logout]
+[:01000019] 123 is logout
+123@DevelopServer is logout
+[:01000019] KILL self
+Cat:msgagent.lua[50] user_info.agent	16777242
+[:0100001a] 123 is login
+[:01000012] connect from 192.168.3.6:49284 (fd = 20)
+Cat:logind.lua[22] user, password server	123	password	DevelopServer
+[:01000012] -----------------客户端发送token
+123@DevelopServer is login, secret is 9763327b16dc8aa3
+Cat:Task.lua[Logout]
+[:0100001a] 123 is logout
+123@DevelopServer is logout
+[:0100001a] KILL self
+Cat:msgagent.lua[50] user_info.agent	16777243
+[:0100001b] 123 is login
+[:01000013] connect from 192.168.3.6:49286 (fd = 22)
+Cat:logind.lua[22] user, password server	123	password	DevelopServer
+[:01000013] -----------------客户端发送token
+123@DevelopServer is login, secret is 74c6b70d3589fa94
+Cat:Task.lua[Logout]
+[:0100001b] 123 is logout
+123@DevelopServer is logout
+[:0100001b] KILL self
+Cat:msgagent.lua[50] user_info.agent	16777244
+[:0100001c] 123 is login
+[:01000014] connect from 192.168.3.6:49289 (fd = 24)
+Cat:logind.lua[22] user, password server	123	password	DevelopServer
+[:01000014] -----------------客户端发送token
+123@DevelopServer is login, secret is 906319b7962e5ccc
+Cat:Task.lua[Logout]
+[:0100001c] 123 is logout
+123@DevelopServer is logout
+[:0100001c] KILL self
+Cat:msgagent.lua[50] user_info.agent	16777245
+[:0100001d] 123 is login
+[:0100000d] connect from 192.168.3.6:49381 (fd = 26)
+Cat:logind.lua[22] user, password server	123	password	DevelopServer
+[:0100000d] -----------------客户端发送token
+123@DevelopServer is login, secret is 554e18ab0655b6ae
+Cat:Task.lua[Logout]
+[:0100001d] 123 is logout
+123@DevelopServer is logout
+[:0100001d] KILL self
+Cat:msgagent.lua[50] user_info.agent	16777246
+[:0100001e] 123 is login
