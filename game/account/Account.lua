@@ -64,6 +64,7 @@ function account.account_create_role( user_info, req_data )
 			if is_succeed then
 				local attr_info = gen_role_base_attr(new_role_id)
 				is_succeed = skynet.call(gameDBServer, "lua", "insert", "RoleBaseInfo", {role_id=new_role_id, name=req_data.name, career=req_data.career, level=1, hp=attr_info.hp})
+				skynet.error("-------------body  " .. req_data.body)
 				is_succeed = is_succeed and skynet.call(gameDBServer, "lua", "insert", "RoleLooksInfo", {role_id=new_role_id, body=req_data.body, hair=0})
 				is_succeed = is_succeed and skynet.call(gameDBServer, "lua", "insert", "AttrInfo", attr_info)
 			end
