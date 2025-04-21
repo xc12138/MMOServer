@@ -23,6 +23,7 @@ account_create_role 3 {
 	request {
 		career 0 : integer
 		name 1 : string
+		body 2 : integer
 	}
 	response {
 		result 0 : integer
