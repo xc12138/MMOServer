@@ -84,7 +84,7 @@ function SkillActions:Init(  )
 	--扣血后有万份之 x 概率触发400002buff(晕眩)
 	self.actions[110011] = function( cfg )
 		return Sequence {
-			Delay {500}, 
+			Delay {1000}, 
 			PickTarget {}, 
 			Hurt {}, 
 			If { Random{cfg.buff.probability}, Buff{400002} } 
