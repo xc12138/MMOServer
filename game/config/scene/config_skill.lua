@@ -61,7 +61,7 @@ local config = {
 		},	
 	},
 	[110011] = {
-		skill_id = 110011, target_type = 1, shape = 1, duration = 1000, detail = {
+		skill_id = 110011, target_type = 1, shape = 1, duration = 1700, detail = {
 			[1] = {
 				condition = {{lv, 1}}, cd = 8000, attack_max_num = 5, damage_rate = 20000, area = 600, 
 				desc = [[男角技能2，造成600点伤害同时有50%的概率让对方晕眩3秒]],
