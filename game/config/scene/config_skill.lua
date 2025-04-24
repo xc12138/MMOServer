@@ -61,14 +61,14 @@ local config = {
 		},	
 	},
 	[110011] = {
-		skill_id = 110011, target_type = 1, shape = 1, duration = 1700, detail = {
+		skill_id = 110011, target_type = 1, shape = 1, duration = 17000, detail = {
 			[1] = {
-				condition = {{lv, 1}}, cd = 8000, attack_max_num = 5, damage_rate = 20000, area = 600, 
+				condition = {{lv, 1}}, cd = 1000, attack_max_num = 5, damage_rate = 20000, area = 600, 
 				desc = [[男角技能2，造成600点伤害同时有50%的概率让对方晕眩3秒]],
 				buff = {probability=50000, duration=8000}
 			},
 			[2] = {
-				condition = {{lv, 2}}, cd = 8000, attack_max_num = 5, damage_rate = 22000, area = 700, 
+				condition = {{lv, 2}}, cd = 1000, attack_max_num = 5, damage_rate = 22000, area = 700, 
 				desc = [[男角技能2，造成700点伤害同时有20%的概率让对方晕眩4秒]],
 				buff = {probability=2000, duration=4000}
 			},
