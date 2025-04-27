@@ -23,7 +23,7 @@ local Update = function ( self )
 	-- print('Cat:Hurt.lua[23] self.skillData.caster_uid, attackerEntity', self.skillData.caster_uid, attackerEntity)
 	if not attackerEntity then 
 		print('Cat:Hurt.lua attackerEntity no exist uid : ', self.skillData.caster_uid)
-		return 
+		return
 	end
 	
 	local isExist = self.entityMgr:Exists(attackerEntity)

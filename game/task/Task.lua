@@ -161,6 +161,15 @@ function SprotoHandlers.Task_DoTask( userInfo, reqData )
 					addTargetMonsterIfKillTask(userInfo.cur_role_id, nextTaskInfo)
 					table.insert(taskInfos.taskList, nextTaskInfo)
 					skynet.send(Task.gameDBServer, "lua", "update", "TaskList", "id", taskInfo.id, nextTaskInfo)
+					-- 发送奖励
+					if cfg.rewards then
+						local func = Task.dispatcher:GetPublicFunc("Bag", "ChangeBagGoods")
+						if func then
+							for index, value in ipairs(cfg.rewards) do
+								func(value.id,value.num)
+							end
+						end
+					end
 				end
 				skynet.timeout(1,function()
 					addNewChangedTaskInfo(userInfo.cur_role_id, taskInfo)
@@ -220,8 +229,9 @@ end
 
 local PublicFuncs = {}
 
-function PublicFuncs.Init( userInfo )
+function PublicFuncs.Init( userInfo ,dispatcher)
 	user_info = userInfo
+	Task.dispatcher = dispatcher
 end
 
 function PublicFuncs.Logout( )
