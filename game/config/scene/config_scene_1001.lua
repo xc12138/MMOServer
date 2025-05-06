@@ -42,9 +42,9 @@ npc_list = {{
 		npc_id = 3000,
 },
 {
-		pos_x = 64309,
-		pos_y = 16886,
-		pos_z = 123830,
+		pos_x = 69009,
+		pos_y = 16386,
+		pos_z = 120530,
 		npc_id = 3001,
 },
 {

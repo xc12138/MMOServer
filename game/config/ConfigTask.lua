@@ -83,7 +83,7 @@ local config = {
 				},
 			},
 			{
-				subType = 2, sceneID=1001, sceneID=1001, contentID=2004, maxProgress=30
+				subType = 2, sceneID=1001, contentID=2004, maxProgress=30
 			},
 			{
 				subType = 1, sceneID=1001, contentID = 3000, content = {
