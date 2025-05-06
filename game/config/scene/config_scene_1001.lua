@@ -54,14 +54,7 @@ npc_list = {{
 		npc_id = 3002,
 },
 },
-monster_list = {{
-		pos_x = 84990,
-		pos_y = 16538,
-		pos_z = 116869,
-		monster_type_id = 2000,
-		monster_num = 7,
-		radius = 1000,
-},
+monster_list = {
 {
 		pos_x = 84990,
 		pos_y = 16538,
@@ -106,25 +99,9 @@ monster_list = {{
 		pos_x = 79920,
 		pos_y = 16438,
 		pos_z = 110400,
-		monster_type_id = 2002,
-		monster_num = 7,
-		radius = 1400,
-},
-{
-		pos_x = 79920,
-		pos_y = 16438,
-		pos_z = 110400,
 		monster_type_id = 2001,
 		monster_num = 1,
 		radius = 1200,
-},
-{
-		pos_x = 85959,
-		pos_y = 16450,
-		pos_z = 129530,
-		monster_type_id = 2002,
-		monster_num = 8,
-		radius = 1600,
 },
 {
 		pos_x = 85959,
@@ -149,14 +126,6 @@ monster_list = {{
 		monster_type_id = 2001,
 		monster_num = 1,
 		radius = 800,
-},
-{
-		pos_x = 79479,
-		pos_y = 16538,
-		pos_z = 133530,
-		monster_type_id = 2000,
-		monster_num = 6,
-		radius = 1000,
 },
 {
 		pos_x = 79479,

@@ -25,7 +25,7 @@ local config = {
 				},
 			},
 			{
-				subType = 2, sceneID=1001, contentID=2000, maxProgress=10
+				subType = 2, sceneID=1001, contentID=2002, maxProgress=10
 			},
 			{
 				subType = 1, sceneID=1001, contentID = 3001, content = {
@@ -54,7 +54,7 @@ local config = {
 				},
 			},
 			{
-				subType = 2, sceneID=1001, contentID=2002, maxProgress=20
+				subType = 2, sceneID=1001, contentID=2000, maxProgress=20
 			},
 			{
 				subType = 1, sceneID=1001, contentID = 3002, content = {
